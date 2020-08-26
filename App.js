@@ -1,10 +1,11 @@
 
 import * as React from 'react';
-import { View, Text , StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/screens/Login';
 import Splash from './src/screens/Splash';
+import Register from './src/screens/Register';
 
 function HomeScreen() {
   return (
@@ -20,26 +21,38 @@ const Root = createStackNavigator();
 
 function AuthStack() {
   return (
-      <Auth.Navigator>
-        <Auth.Screen name="Login" component={Login}  />
-      </Auth.Navigator>
+    <Auth.Navigator>
+      <Auth.Screen name="Login" component={Login}
+        // options={{
+        //   headerStyle: {
+        //     backgroundColor: 'green',
+        //     height: 60,
+        //   },
+        //   headerTitleStyle: {
+
+        //   },
+        //   headerTintColor: '#fff'
+        // }}
+      />
+      <Auth.Screen name="Register" component={Register} />
+    </Auth.Navigator>
   );
 }
 function AppStack() {
   return (
-      <Main.Navigator>
-        <Main.Screen name="Home" component={HomeScreen}  />
-      </Main.Navigator>
+    <Main.Navigator>
+      <Main.Screen name="Home" component={HomeScreen} />
+    </Main.Navigator>
   );
 }
 
 function App() {
   return (
     <NavigationContainer>
-      <Root.Navigator initialRouteName="Splash">
-        <Root.Screen name="Splash" component={Splash}  />
-        <Root.Screen name="Auth" component={AuthStack}  />
-        <Root.Screen name="App" component={AppStack}  />
+      <Root.Navigator initialRouteName="Splash" headerMode="none">
+        <Root.Screen name="Splash" component={Splash} />
+        <Root.Screen name="Auth" component={AuthStack} />
+        <Root.Screen name="App" component={AppStack} />
       </Root.Navigator>
     </NavigationContainer>
   );
