@@ -1,14 +1,31 @@
 
-import * as React from 'react';
-import { View, Text , StyleSheet } from 'react-native';
-
+import React ,{useLayoutEffect} from 'react';
+import { View, Text , StyleSheet, StatusBar } from 'react-native';
+import {deviceWidth, deviceHeight}  from  '../components/helpers'
+import { SafeAreaView } from 'react-native-safe-area-context';
+ function CustomHeader(){
+   return (
+        <>
+        <SafeAreaView>
+          <View style={{ height: 500  }}>
+            <Text style={{}}>Header</Text>
+          </View>
+        </SafeAreaView>
+        </>
+   )
+ }
     
 const  Login =({navigation}) => {
- 
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({ headerTitle: <CustomHeader />});
+  // }, [navigation]);
   return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
     <View style={styles.container}>
       <Text style={styles.screen}>LoginScreen</Text>
     </View>
+    </>
   );
 }
 

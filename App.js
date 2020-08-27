@@ -6,6 +6,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/screens/Login';
 import Splash from './src/screens/Splash';
 import Register from './src/screens/Register';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { deviceHeight } from './src/components/helpers';
+
+// options={{
+//   headerStyle: {
+//     backgroundColor: 'green',
+//     height: 60,
+//   },
+//   headerTitleStyle: {
+
+//   },
+//   headerTintColor: '#fff'
+// }}
 
 function HomeScreen() {
   return (
@@ -15,25 +28,35 @@ function HomeScreen() {
   );
 }
 
+const Loading = createStackNavigator();
 const Auth = createStackNavigator();
 const Main = createStackNavigator();
 const Root = createStackNavigator();
 
+
+function CustomHeader(){
+  return (
+       <>
+       <SafeAreaView>
+        <View style={{ flex: 1,flexDirection:"row", alignContent: "center", justifyContent: 'center' }}>
+           <Text style={{textAlign:"center" }}>AppHeader</Text>
+         </View>
+       </SafeAreaView>
+       </>
+  )
+}
+
+function LoadingStack() {
+  return (
+    <Loading.Navigator headerMode="none">
+      <Loading.Screen name="Splash" component={Splash}  />
+    </Loading.Navigator>
+  );
+}
 function AuthStack() {
   return (
     <Auth.Navigator>
-      <Auth.Screen name="Login" component={Login}
-        // options={{
-        //   headerStyle: {
-        //     backgroundColor: 'green',
-        //     height: 60,
-        //   },
-        //   headerTitleStyle: {
-
-        //   },
-        //   headerTintColor: '#fff'
-        // }}
-      />
+      <Auth.Screen name="Login" component={Login} options={{headerTitle:<CustomHeader/>}}/>
       <Auth.Screen name="Register" component={Register} />
     </Auth.Navigator>
   );
@@ -48,13 +71,15 @@ function AppStack() {
 
 function App() {
   return (
-    <NavigationContainer>
-      <Root.Navigator initialRouteName="Splash" headerMode="none">
-        <Root.Screen name="Splash" component={Splash} />
-        <Root.Screen name="Auth" component={AuthStack} />
-        <Root.Screen name="App" component={AppStack} />
-      </Root.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Root.Navigator initialRouteName="Splash" headerMode="none">
+          <Root.Screen name="Splash" component={LoadingStack} />
+          <Root.Screen name="Auth" component={AuthStack} />
+          <Root.Screen name="App" component={AppStack} />
+        </Root.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
