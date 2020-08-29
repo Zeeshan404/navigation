@@ -34,29 +34,29 @@ const Main = createStackNavigator();
 const Root = createStackNavigator();
 
 
-function CustomHeader(){
+function CustomHeader() {
   return (
-       <>
-       <SafeAreaView>
-        <View style={{ flex: 1,flexDirection:"row", alignContent: "center", justifyContent: 'center' }}>
-           <Text style={{textAlign:"center" }}>AppHeader</Text>
-         </View>
-       </SafeAreaView>
-       </>
+    <>
+      <SafeAreaView>
+        <View style={{ flex: 1, flexDirection: "row", alignContent: "center", justifyContent: 'center' }}>
+          <Text style={{ textAlign: "center" }}>AppHeader</Text>
+        </View>
+      </SafeAreaView>
+    </>
   )
 }
 
 function LoadingStack() {
   return (
     <Loading.Navigator headerMode="none">
-      <Loading.Screen name="Splash" component={Splash}  />
+      <Loading.Screen name="Splash" component={Splash} />
     </Loading.Navigator>
   );
 }
 function AuthStack() {
   return (
     <Auth.Navigator>
-      <Auth.Screen name="Login" component={Login} options={{headerTitle:<CustomHeader/>}}/>
+      <Auth.Screen name="Login" component={Login} options={{ headerTitle: <CustomHeader /> }} />
       <Auth.Screen name="Register" component={Register} />
     </Auth.Navigator>
   );
