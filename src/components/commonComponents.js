@@ -9,6 +9,3 @@ export const Loader = ({ loading, size="large", color="blue" }) => {
             : null
     )
 }
-
-
-

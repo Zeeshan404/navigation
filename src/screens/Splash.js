@@ -6,7 +6,7 @@ import { SPLASH_IMAGE } from '../components/constants/imageConstants';
 import { Loader } from '../components/commonComponents';
 
 function Splash({ navigation }) {
-  let [counter, setCounter] = useState(1);
+  let [counter, setCounter] = useState(2);
   let [loading, setLoading] = useState(false)
   let mounted = useRef(false)
   useEffect(() => {
@@ -22,7 +22,7 @@ function Splash({ navigation }) {
 
   const fetchInfo = () => {
     setLoading(false)
-    // navigation.dispatch(StackActions.replace('Auth'))
+    navigation.dispatch(StackActions.replace('Auth'))
   }
 
   return (
