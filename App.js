@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import Login from './src/screens/Login';
@@ -9,7 +9,11 @@ import Register from './src/screens/Register';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { HEADER, WHITE } from './src/components/constants/colorConstants';
 import HomeScreen from './src/screens/Home';
+import Settings from './src/screens/Settings';
 import { MyTheme } from './src/components/constants/Themes';
+import Icon from 'react-native-vector-icons/Ionicons'
+import { HEADERFONTSIZE } from './src/components/helpers';
+
 // import { Icon } from 'react-native-vector-icons/icon';
 
 
@@ -49,25 +53,31 @@ function AuthStack() {
 // let screenOptions = { headerStyle: { backgroundColor: HEADER }}
 // screenOptions={{...screenOptions}}
 // options={{ title: 'My home123' }} 
-// let options = {
-//   backgroundColor: "red",
-//   title:"Custom Header",
-//   headerTitleStyle: {
-//     backgroundColor:"red",
-//   },
-//   headerStyle: {
-//     backgroundColor: MyTheme.headerColor,
-//     height: 200,
-//   },
-//   headerTintColor: MyTheme.colors.text,
-// }
+let options = {
+  backgroundColor: "red",
+  title:"asd",
+  headerTitleStyle: {
+    backgroundColor:"red",
+  },
+  headerStyle: {
+    backgroundColor: "purple",
+    height: 100,
+  },
+  headerTintColor: "grey",
+}
 // options={{...options}}
 
-
+let commonOptions = {
+  headerStyle: { backgroundColor: HEADER },
+  headerTintColor: MyTheme.headerTint,
+  headerTitleStyle: { fontWeight: "bold", fontSize: MyTheme.headerfontSize },
+  // headerRight:null
+}
 function AppStack() {
   return (
-    <Main.Navigator headerMode="screen">
+    <Main.Navigator headerMode="screen" screenOptions={{...commonOptions}}>
       <Main.Screen name="Home" component={HomeScreen} />
+      <Main.Screen name="Settings" component={Settings} />
     </Main.Navigator>
   );
 }
