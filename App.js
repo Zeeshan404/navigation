@@ -14,8 +14,6 @@ import { MyTheme } from './src/components/constants/Themes';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { HEADERFONTSIZE } from './src/components/helpers';
 
-// import { Icon } from 'react-native-vector-icons/icon';
-
 
 
 const Loading = createStackNavigator();
@@ -39,43 +37,20 @@ function AuthStack() {
     </Auth.Navigator>
   );
 }
-// function CustomHeader() {
-//   return (
-//     <>
-//       <SafeAreaView>
-//         <View style={{ flex: 1, flexDirection: "row", alignContent: "center", justifyContent: 'center' }}>
-//           <Text style={{ textAlign: "center" }}>AppHeader</Text>
-//         </View>
-//       </SafeAreaView>
-//     </>
-//   )
-// }
-// let screenOptions = { headerStyle: { backgroundColor: HEADER }}
-// screenOptions={{...screenOptions}}
-// options={{ title: 'My home123' }} 
-let options = {
-  backgroundColor: "red",
-  title:"asd",
-  headerTitleStyle: {
-    backgroundColor:"red",
-  },
-  headerStyle: {
-    backgroundColor: "purple",
-    height: 100,
-  },
-  headerTintColor: "grey",
-}
-// options={{...options}}
+
 
 let commonOptions = {
   headerStyle: { backgroundColor: HEADER },
   headerTintColor: MyTheme.headerTint,
   headerTitleStyle: { fontWeight: "bold", fontSize: MyTheme.headerfontSize },
-  // headerRight:null
 }
+
 function AppStack() {
   return (
-    <Main.Navigator headerMode="screen" screenOptions={{...commonOptions}}>
+    <Main.Navigator headerMode="screen" 
+ screenOptions={{...commonOptions}}
+    
+    >
       <Main.Screen name="Home" component={HomeScreen} />
       <Main.Screen name="Settings" component={Settings} />
     </Main.Navigator>
@@ -110,3 +85,33 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+// function CustomHeader() {
+//   return (
+//     <>
+//       <SafeAreaView>
+//         <View style={{ flex: 1, flexDirection: "row", alignContent: "center", justifyContent: 'center' }}>
+//           <Text style={{ textAlign: "center" }}>AppHeader</Text>
+//         </View>
+//       </SafeAreaView>
+//     </>
+//   )
+// }
+// let screenOptions = { headerStyle: { backgroundColor: HEADER }}
+// screenOptions={{...screenOptions}}
+// options={{ title: 'My home123' }} 
+// let options = {
+//   backgroundColor: "red",
+//   title:"asd",
+//   headerTitleStyle: {
+//     backgroundColor:"red",
+//   },
+//   headerStyle: {
+//     backgroundColor: "purple",
+//     height: 100,
+//   },
+//   headerTintColor: "grey",
+// }
+// options={{...options}}

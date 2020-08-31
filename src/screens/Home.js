@@ -1,33 +1,29 @@
 
 import React, { useLayoutEffect } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { HeaderBackButton, HeaderTitle } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons'
+import { View, Text, StyleSheet, Button, StatusBar } from 'react-native';
+import { MyTheme } from '../components/constants/Themes';
+import Header from '../components/Header';
+
+
 const HomeScreen = ({ navigation }, props) => {
-
-  function LogoTitle(props) {
-    return (
-      // <View style={{ flexDirection: "row", alignContent: "space-around" ,  }}>
-      // <HeaderBackButton style={{  }} />
-      <Text style={{ flex: 1, textAlign: "center", fontSize: 22, fontWeight: "600", color: "white", backgroundColor:"pink" }}>Home Header</Text>
-      // <Icon name="add-outline" size={30} onPress={()=>{}}/>
-      // </View>
-    );
-  }
-
   useLayoutEffect(() => {
     navigation.setOptions({
-       headerTitle: props => <LogoTitle {...props} />,
-      headerLeft: () => <Icon style={{ backgroundColor:"green"}} name="add-circle-outline" size={30} onPress={() => {  }} />,
-      // headerRight: () => <Icon style={{ backgroundColor:"green"}} name="add-circle-outline" size={30} onPress={() => {  }} />
-      }
+      header: (props) => <Header  {...props} leftIcon="md-menu-outline"/>,
+    }
     );
   }, [navigation]);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.screen}>HomeScreen</Text>
-    </View>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
+      <View style={styles.container}>
+        <Text style={styles.screen}>HomeScreen</Text>
+        <Button
+          title="Go to Settings"
+          onPress={() => navigation.navigate('Settings')}
+        />
+      </View>
+    </>
   );
 }
 const styles = StyleSheet.create({
@@ -43,7 +39,24 @@ const styles = StyleSheet.create({
 export default HomeScreen;
 
 
+// function LogoTitle(props) {
+//   return (
+//     // <View style={{ flexDirection: "row", alignContent: "space-around" ,  }}>
+//     // <HeaderBackButton style={{  }} />
+//     <Text style={{ flex: 1, textAlign: "center", fontSize: 22, fontWeight: "600", color: "white", backgroundColor:"pink" }}>Home Header</Text>
+//     // <Icon name="add-outline" size={30} onPress={()=>{}}/>
+//     // </View>
+//   );
+// }
 
+// useLayoutEffect(() => {
+//   navigation.setOptions({
+//     headerTitle: props => <LogoTitle {...props} />,
+//     headerLeft: () => <Icon style={{ backgroundColor: "green" }} name="arrow-back" size={30} onPress={() => { }} />,
+//     headerRight: () => <Icon style={{ backgroundColor: "green" }} name="add-circle-outline" size={30} onPress={() => { }} />
+//   }
+//   );
+// }, [navigation]);
 // function CustomHeader() {
 //   return (
 //     <>

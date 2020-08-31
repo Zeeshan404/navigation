@@ -1,34 +1,25 @@
-
 import React, { useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, StatusBar, Button } from 'react-native';
-import { HEADER } from '../components/constants/colorConstants';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Header from '../components/Header';
+import { MyTheme } from '../components/constants/Themes';
 
-const Settings = ({ navigation }) => {
-    useLayoutEffect(() => {
-        navigation.setOptions(  
-{
-
-                // headerStyle: { backgroundColor: "purple" },
-                headerTintColor: "gold",
-                // headerRight: () => (
-                //   <Icon name="add-outline" size={30} color="white"/>
-                // ),
-
-            }
-            );
-        }, [navigation]);
-
-
+const Settings =  ({ navigation }, props) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      header: (props) => <Header  {...props} />,
+    }
+    );
+  }, [navigation]);
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor={HEADER} />
+          <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
+
       <View style={styles.container}>
-              <Button
+              {/* <Button
                   title="Update the title"
                   onPress={() => navigation.setOptions({ title: 'Updated!' })}
-              />
+              /> */}
         <Text style={styles.screen}>SettingsScreen</Text>
       </View>
     </>
