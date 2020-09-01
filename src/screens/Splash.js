@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image, StatusBar, Pressable } from 'react-nativ
 import { StackActions } from '@react-navigation/native';
 import { SPLASH_IMAGE } from '../components/constants/imageConstants';
 import { Loader } from '../components/commonComponents';
+import MoveUp from '../animations/MoveUp';
 
 function Splash({ navigation }) {
   let [counter, setCounter] = useState(2);
@@ -22,21 +23,20 @@ function Splash({ navigation }) {
 
   const fetchInfo = () => {
     setLoading(false)
-    navigation.dispatch(StackActions.replace('Auth'))
+    navigation.dispatch(StackActions.replace('App'))
   }
 
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
       <View style={styles.container}>
-        <View style={styles.logoContainer}>
+        <MoveUp style={styles.logoContainer}>
           <Image style={styles.splashimage} source={SPLASH_IMAGE} />
           <Text style={styles.screen}>Skype</Text>
+        </MoveUp>
+        <View style={styles.loaderContainer}>
+          <Loader loading={loading} size="large" color="green" />
         </View>
-      <View style={styles.loaderContainer}>
-        <Loader loading={loading} size="large" color="green" />
-      </View>
-      
       </View>
     </>
   );
@@ -46,16 +46,16 @@ function Splash({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"white"
+    backgroundColor: "white"
   },
-  logoContainer:{
-    flex:0.6,
-    alignItems:"center",
-    justifyContent:"flex-end"
+  logoContainer: {
+    flex: 0.7,
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
-  loaderContainer:{
-    flex:0.4,
-    justifyContent:"center"
+  loaderContainer: {
+    flex: 0.3,
+    justifyContent: "center"
   },
   splashimage: {
     width: 100,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   screen: {
     fontSize: 20,
     color: "black",
-    textAlign:"center"
+    textAlign: "center"
   }
 });
 

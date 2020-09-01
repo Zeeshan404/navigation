@@ -1,14 +1,18 @@
 
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useContext } from 'react';
 import { View, Text, StyleSheet, Button, StatusBar } from 'react-native';
 import { MyTheme } from '../components/constants/Themes';
 import Header from '../components/Header';
-
+import Icon from '../components/common/Icon'
+import { ThemeContext } from '../context/Theme';
 
 const HomeScreen = ({ navigation }, props) => {
+  const themeContext = useContext(ThemeContext)
+  const {theme,toggleTheme} = themeContext;
+  console.log("HomeContext", themeContext)
   useLayoutEffect(() => {
     navigation.setOptions({
-      header: (props) => <Header  {...props} leftIcon="md-menu-outline"/>,
+      header: (props) => <Header  {...props} leftIcon="md-menu-outline" />,
     }
     );
   }, [navigation]);
@@ -16,12 +20,11 @@ const HomeScreen = ({ navigation }, props) => {
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
-      <View style={styles.container}>
+      <View style={{...styles.container,backgroundColor:theme.background}}>
         <Text style={styles.screen}>HomeScreen</Text>
-        <Button
-          title="Go to Settings"
-          onPress={() => navigation.navigate('Settings')}
-        />
+        <Icon name="ios-color-palette-outline" type="Ionicons" color={MyTheme.headerColor} style={{ fontSize: 50 }} />
+        <Button title="Go to Settings" onPress={() => navigation.navigate('Settings')} />
+        <Button title="Toggle Theme" color={theme.foreground} onPress={() => { toggleTheme() }} />
       </View>
     </>
   );
