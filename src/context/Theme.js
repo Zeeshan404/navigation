@@ -18,4 +18,6 @@ export const themes = {
 
 
 
-export const ThemeContext = React.createContext({ "theme": {}, "toggleTheme": ()=>{} });
+export const ThemeContext = React.createContext(
+    
+);

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import { NavigationContainer, } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton, TransitionPresets } from '@react-navigation/stack';
 import Login from './src/screens/Login';
 import Splash from './src/screens/Splash';
 import Register from './src/screens/Register';
@@ -13,6 +13,7 @@ import Settings from './src/screens/Settings';
 import { MyTheme } from './src/components/constants/Themes';
 import ThemeScreen from './src/screens/ThemeScreen';
 import { ThemeContext, themes } from './src/context/Theme'
+import { deviceHeight } from './src/components/helpers';
 
 
 const Loading = createStackNavigator();
@@ -37,16 +38,21 @@ function AuthStack() {
   );
 }
 
-
+// ...TransitionPresets.SlideFromRightIOS,
 let commonOptions = {
-  headerStyle: { backgroundColor: HEADER },
+  headerStyle: { backgroundColor: MyTheme.headerColor ,  height: 55 },
   headerTintColor: MyTheme.headerTint,
   headerTitleStyle: { fontWeight: "bold", fontSize: MyTheme.headerfontSize },
+  headerTitleAlign:"center",
+  // headerLeftContainerStyle:{backgroundColor:"red"},
+  // headerTitleContainerStyle:{backgroundColor:"green" },
+  // headerRightContainerStyle:{backgroundColor:"blue"},
 }
 
 function AppStack() {
   return (
-    <Main.Navigator initialRouteName="Home" headerMode="screen" screenOptions={{ ...commonOptions }} >
+    // <Main.Navigator initialRouteName="Home" headerMode="screen" screenOptions={} >
+    <Main.Navigator initialRouteName="Home" headerMode="screen" screenOptions={{ ...commonOptions ,...TransitionPresets.SlideFromRightIOS, }} >
       <Main.Screen name="Home" component={HomeScreen} />
       <Main.Screen name="Settings" component={Settings} />
       <Main.Screen name="Theme" component={ThemeScreen} />

@@ -1,17 +1,22 @@
 
 import React, { useContext } from 'react';
-import { StyleSheet, Button, View, Text } from 'react-native';
+import { StyleSheet, Button, View, Text ,StatusBar } from 'react-native';
 import { ThemeContext } from '../context/Theme';
+import { MyTheme } from '../components/constants/Themes';
 
 const ThemeScreen = ({ navigation }, props) => {
     const themeContext = useContext(ThemeContext)
     const {theme,toggleTheme} = themeContext;
     console.log("ThemeContext", themeContext)
     return (
-        <View style={{...styles.container ,backgroundColor:theme.background}}>
-            <Text style={styles.screen}>ThemeScreen</Text>
-            <Button title="I am Button" color={theme.foreground} onPress={() => { toggleTheme() }} />
-        </View>
+        <>
+            <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
+
+            <View style={{ ...styles.container, backgroundColor: theme.background }}>
+                <Text style={styles.screen}>ThemeScreen</Text>
+                <Button title="I am Button" color={theme.foreground} onPress={() => { toggleTheme() }} />
+            </View>
+        </>
     );
 }
 

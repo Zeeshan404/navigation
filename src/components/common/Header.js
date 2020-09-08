@@ -1,12 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { MyTheme } from '../components/constants/Themes';
+import { MyTheme } from '../constants/Themes';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { deviceHeight } from '../components/helpers';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { deviceHeight } from '../helpers';
 import { HeaderBackButton } from '@react-navigation/stack';
-
-
 const Header = ({ scene, previous, navigation }, props) => {
     const { options } = scene.descriptor;
     const title =
@@ -15,17 +12,17 @@ const Header = ({ scene, previous, navigation }, props) => {
             : options.title !== undefined
                 ? options.title
                 : scene.route.name;
-    console.log("PROPS LEFT", props.leftIcon)
+    // console.log("PROPS LEFT", props.leftIcon)
     return (
         <View style={{ flexDirection: "row", backgroundColor: MyTheme.headerColor, height: deviceHeight * 0.07 }}>
             <View style={styles.headerIconContainer}>
                 {
-                    previous ?
+                    // previous ?
                         <HeaderBackButton tintColor={'white'} onPress={() => { navigation.goBack() }} />
                         // : null
-                        :
+                        // :
                         // props.leftIcon ?
-                            <Icon name={props.leftIcon} size={35} onPress={() => { previous ? navigation.goBack() : null }} color="white" />
+                            // <Icon name={props.leftIcon} size={35} onPress={() => { previous ? navigation.goBack() : null }} color="white" />
                             // : null
                 }
             </View>

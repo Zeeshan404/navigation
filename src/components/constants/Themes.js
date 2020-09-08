@@ -13,5 +13,5 @@ export const MyTheme = {
     headerTint: 'rgb(255,255,255)',
     white:'rgb(255,255,255)',
     blackground: 'rgb(0,0,0)',
-    headerfontSize:22
+    headerfontSize:23
   };

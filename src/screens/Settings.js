@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useContext } from 'react';
 import { View, Text, StyleSheet, StatusBar, Button } from 'react-native';
-import Header from '../components/Header';
 import { MyTheme } from '../components/constants/Themes';
 import { themes, ThemeContext } from '../context/Theme';
 
@@ -10,7 +9,6 @@ const Settings = ({ navigation }, props) => {
   console.log("SettingContext", themeContext)
   useLayoutEffect(() => {
     navigation.setOptions({
-      header: (props) => <Header  {...props} />,
     }
     );
   }, [navigation]);
@@ -19,7 +17,7 @@ const Settings = ({ navigation }, props) => {
     <>
       <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
       <View style={{ ...styles.container, backgroundColor: themes.background }}>
-        <Button title="Go to Settings" onPress={() => navigation.navigate('Theme')} />
+        <Button title="Go to Theme" onPress={() => navigation.navigate('Theme')} />
         <Button title="Toggle Theme" color={theme.foreground} onPress={() => { toggleTheme() }} />
         <Text style={styles.screen}>SettingsScreen</Text>
       </View>

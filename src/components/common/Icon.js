@@ -14,6 +14,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const IconComponent = {
     "AntDesign": AntDesign,
@@ -32,10 +33,10 @@ const IconComponent = {
     "Zocial": Zocial,
 };
 
-const Icon = ({ name, size = 30, color ="blue", type, style }) => {
+const Icon = ({ name, size = 25, color ="white", type, style={} ,onPress}) => {
     const MyIcon = IconComponent[type]
     return (
-        <MyIcon style={style} name={name} color={color} size={size} />
+            <MyIcon style={style} name={name} color={color} size={size} onPress={onPress} />
     )
 }
 
