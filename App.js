@@ -62,8 +62,8 @@ function AppStack() {
 
 function App() {
   const [theme, setTheme] = useState(themes.light)
-  const toggleTheme = () => {
-    setTheme(theme == themes.dark ? {...themes.light} : {...themes.dark});
+  const toggleTheme = (name) => {
+    setTheme(name == "light" ? {...themes.light} : {...themes.dark});
   }
   const state = { "theme": theme, "toggleTheme": toggleTheme }
 
@@ -71,7 +71,7 @@ function App() {
     <SafeAreaProvider>
       <ThemeContext.Provider value={state}>
         <NavigationContainer>
-          <Root.Navigator initialRouteName="Splash" headerMode="none">
+          <Root.Navigator initialRouteName="App" headerMode="none">
             <Root.Screen name="Splash" component={LoadingStack} />
             <Root.Screen name="Auth" component={AuthStack} />
             <Root.Screen name="App" component={AppStack} />

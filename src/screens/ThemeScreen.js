@@ -1,20 +1,36 @@
 
-import React, { useContext } from 'react';
-import { StyleSheet, Button, View, Text ,StatusBar } from 'react-native';
+import React, { useContext, useEffect, useLayoutEffect } from 'react';
+import { StyleSheet, Button, View, Text, StatusBar } from 'react-native';
 import { ThemeContext } from '../context/Theme';
-import { MyTheme } from '../components/constants/Themes';
+import Header from '../components/common/Header';
 
 const ThemeScreen = ({ navigation }, props) => {
     const themeContext = useContext(ThemeContext)
-    const {theme,toggleTheme} = themeContext;
-    console.log("ThemeContext", themeContext)
+    const { theme, toggleTheme } = themeContext;
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            header: (props) => (
+                <Header  {...props}
+                    heading="Theme Screen"
+                    left={{ name: "infocirlceo", type: "AntDesign" }}
+                    right={{ name: "settings", type: "Ionicons" }}
+                    leftPress={() => { alert('LeftPressed') }}
+                    rightPress={() => { alert('rightPressed') }}
+                />
+            )
+        }
+        );
+    }, [navigation]);
+    useEffect(() => { }, [themeContext])
+
     return (
         <>
-            <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
-
+            <StatusBar barStyle="light-content" backgroundColor={theme.colors.primary} />
             <View style={{ ...styles.container, backgroundColor: theme.background }}>
                 <Text style={styles.screen}>ThemeScreen</Text>
-                <Button title="I am Button" color={theme.foreground} onPress={() => { toggleTheme() }} />
+                <Button title="Go to Settings" color={theme.colors.notification} onPress={() => navigation.navigate('Settings')} />
+                <Button title="Set Dark Theme" color={theme.colors.btnColor} onPress={() => { toggleTheme("dark") }} />
+                <Button title="Set Light Theme" color={theme.colors.btnColor} onPress={() => { toggleTheme("light") }} />
             </View>
         </>
     );

@@ -1,24 +1,35 @@
-import React, { useLayoutEffect, useContext } from 'react';
+import React, { useLayoutEffect, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, StatusBar, Button } from 'react-native';
-import { MyTheme } from '../components/constants/Themes';
-import { themes, ThemeContext } from '../context/Theme';
+import { ThemeContext } from '../context/Theme';
+import  Header  from '../components/common/Header';
 
 const Settings = ({ navigation }, props) => {
   const themeContext = useContext(ThemeContext)
   const { theme, toggleTheme } = themeContext;
-  console.log("SettingContext", themeContext)
+  // console.log("SettingContext", themeContext)
   useLayoutEffect(() => {
     navigation.setOptions({
+      header: (props) => (
+        <Header  {...props} 
+        heading="Setting Screen" 
+        left={{name:"infocirlceo", type:"AntDesign"}}
+        right={{ name: "settings", type: "Ionicons" }}
+        leftPress={()=>{alert('LeftPressed')}}
+        rightPress={()=>{alert('rightPressed')}}
+      />
+      )
     }
     );
   }, [navigation]);
+  useEffect(() => { }, [themeContext])
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor={MyTheme.headerColor} />
-      <View style={{ ...styles.container, backgroundColor: themes.background }}>
-        <Button title="Go to Theme" onPress={() => navigation.navigate('Theme')} />
-        <Button title="Toggle Theme" color={theme.foreground} onPress={() => { toggleTheme() }} />
+      <StatusBar barStyle="light-content" backgroundColor={theme.colors.primary} />
+      <View style={{ ...styles.container, backgroundColor: theme.background }}>
+        <Button title="Go to Theme" color={theme.colors.notification}  onPress={() => navigation.navigate('Theme')} />
+        <Button title="Set Dark Theme" color={theme.colors.btnColor} onPress={() => { toggleTheme("dark") }} />
+        <Button title="Set Light Theme" color={theme.colors.btnColor} onPress={() => { toggleTheme("light") }} />
         <Text style={styles.screen}>SettingsScreen</Text>
       </View>
     </>

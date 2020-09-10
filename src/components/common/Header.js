@@ -1,57 +1,88 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { MyTheme } from '../constants/Themes';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from './Icon';
 import { deviceHeight } from '../helpers';
-import { HeaderBackButton } from '@react-navigation/stack';
-const Header = ({ scene, previous, navigation }, props) => {
+import { ThemeContext } from '../../context/Theme';
+
+
+const Header = ({ scene, previous, navigation, heading, left, leftPress, right, rightPress }) => {
+    // const { themeContext } = useContext(ThemeContext)
+    // const {theme} = themeContext
+    // console.log("HEADER THEME", ThemeContext)
+    // const {theme} = themeContext
     const { options } = scene.descriptor;
-    const title =
+    const title = heading !== undefined ? heading :
         options.headerTitle !== undefined
             ? options.headerTitle
             : options.title !== undefined
                 ? options.title
                 : scene.route.name;
-    // console.log("PROPS LEFT", props.leftIcon)
     return (
-        <View style={{ flexDirection: "row", backgroundColor: MyTheme.headerColor, height: deviceHeight * 0.07 }}>
-            <View style={styles.headerIconContainer}>
-                {
-                    // previous ?
-                        <HeaderBackButton tintColor={'white'} onPress={() => { navigation.goBack() }} />
-                        // : null
-                        // :
-                        // props.leftIcon ?
-                            // <Icon name={props.leftIcon} size={35} onPress={() => { previous ? navigation.goBack() : null }} color="white" />
-                            // : null
-                }
-            </View>
-            <View style={styles.headingContainer}>
-                <Text style={styles.heading}> Header Title</Text>
-            </View>
-            <View style={styles.headerIconContainer}>
-                <Icon style={{}} name="add" size={30} onPress={() => { alert('left press') }} color="white" />
-            </View>
-        </View>
+        <ThemeContext.Consumer>
+            {({theme}) => (
+
+                <View style={{ ...styles.container, backgroundColor: theme.colors.primary }}>
+                    <View style={styles.headerIconContainer}>
+                        {
+                            previous
+                                ? <Icon name="left" type="AntDesign" onPress={() => { navigation.goBack() }} color="white" />
+                                : left
+                                    ? <Icon name={left.name} type={left.type} size={25} onPress={leftPress} color="white" />
+                                    :
+                                    null
+                        }
+                    </View>
+                    <View style={styles.headingContainer}>
+                        <Text style={styles.heading}>{title}</Text>
+                    </View>
+                    <View style={styles.headerIconContainer}>
+                        {
+                            right
+                                ? <Icon name={right.name} type={right.type} size={25} onPress={rightPress} color="white" />
+                                :
+                                null
+                        }
+                    </View>
+                </View>
+            )}
+
+        </ThemeContext.Consumer>
+
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flexDirection: "row",
+        height: deviceHeight * 0.07,
+        alignItems: "center",
+        justifyContent: "center",
+    },
     headerIconContainer: {
         flex: 0.2,
-        justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        // backgroundColor:"red"
     },
     headingContainer: {
         flex: 0.8,
-        justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        // backgroundColor:"grey"
     },
     heading: {
         fontSize: 23,
         color: "white",
-        alignSelf: "center",
         fontWeight: "bold",
     },
 });
 export default Header;
+
+
+
+// {
+//     previous
+//         ? <HeaderBackButton tintColor={MyTheme.headerTint} onPress={() => { navigation.goBack() }} />
+//         : left
+//             ? <Icon name={left.name} type={left.type} size={35} onPress={leftPress} color="white" />
+//             :
+//             null
+// }
